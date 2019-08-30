@@ -3,12 +3,12 @@ Feature: Post Data from Payload
   # activity ID from PostData: 588bbad8-7c4f-4f8e-9f74-7f97a25219d
   Scenario: User posts data to DB from payload
     Given the following payload
-      | externalProcessIdAtCarrier             | 7854a     |
+      | externalProcessIdAtCarrier             | 123456a   |
       | inquiryLocation.address.city           | Berlin    |
       | inquiryLocation.address.cityPart       | Spandau   |
       | inquiryLocation.address.postcode       | 13581     |
       | inquiryLocation.address.streetName     | Bager_Str |
-      | inquiryLocation.address.streetNr       | 20        |
+      | inquiryLocation.address.streetNr       | 200       |
       | inquiryLocation.address.streetNrSuffix | A         |
       | inquiryLocation.klsId                  | 567       |
     When user sends this to gigabitAvailabilityInquiries
