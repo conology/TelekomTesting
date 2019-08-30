@@ -7,7 +7,9 @@ import cucumber.api.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
+
 import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -26,14 +28,14 @@ public class Stepdefs {
     @Given("the following payload$")
     public void theFollowingPayload(Map<String,String> responseFields) {
         this.payload = turnMapIntoJSONFormat(responseFields);
-        System.out.println("the Following Payload: " + convertWithIteration(responseFields));
+        System.out.println("the Following Payload: "+ convertWithIteration(responseFields));
         request = given()
                 .header("Content-Type", "application/json")
                 .body(payload);
     }
 
     @Given("activity ID {word} exists")
-    public void activity_exists_with_id(String id) {
+    public void activity_exists_with_id(String id){
         this.id = id;
         request = given();
     }
@@ -46,7 +48,9 @@ public class Stepdefs {
 
     @When("a user retrieves data from activity")
     public void retrieving_data() {
+        //System.out.println(REQUEST_URL+id);
         this.response = request.when().get(REQUEST_URL+id);
+        //  System.out.println("response: " + response.prettyPrint());
     }
 
     @When("user sends this to {word}")
@@ -59,19 +63,16 @@ public class Stepdefs {
 
     @Then("the status code is {int}")
     public void verify_status_code(int code) {
+        //response = request.when().get(REQUEST_URL+id);
         responseCode = code;
         System.out.println("status code check: "+code);
         json = response
                 .then()
                 .statusCode(code);
-        System.out.println(json.extract().body().asString());
-        /*
-        ValidatableResponse.extract().body().asString() returns actual content
-        */
     }
 
     @And("response includes the following$")
-    public void response_equals(Map<String,String> responseFields) {
+    public void response_equals(Map<String,String> responseFields){
         //System.out.println(convertWithIteration(responseFields));
         for (Map.Entry<String, String> field : responseFields.entrySet()) {
             if (responseCode == 200) json.body(field.getKey(), equalTo(field.getValue()));

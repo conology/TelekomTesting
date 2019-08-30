@@ -18,3 +18,4 @@ Feature: Get Data From Activity ID
     When a user retrieves data from activity
     Then the status code is 404
     #And user gets information about the error
+
